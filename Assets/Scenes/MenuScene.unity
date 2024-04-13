@@ -431,6 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b601b1cf82319b4c8d053626bb7c61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KauriPala: {fileID: 11400000, guid: a2b33a42fc35b464c98f793799c2a37d, type: 2}
+  Click: {fileID: 11400000, guid: e9f9ddb49ca79c5408573ae4f69e44a1, type: 2}
 --- !u!114 &907362428
 MonoBehaviour:
   m_ObjectHideFlags: 0

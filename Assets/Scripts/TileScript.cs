@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TileScript : MonoBehaviour
 {
-    public float speed = 0.01f;
     private Vector3 destination;
-    private bool isMoving;
 
     void Start()
     {
@@ -15,15 +14,17 @@ public class TileScript : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, destination, speed);
-        if (transform.position != destination )
-        {
-            isMoving = true;
-        }
+        
     }
 
     public void SetDestination(Vector3 newPos)
     {
         destination = newPos;
+        transform.DOMove(destination, 1f);
+        //Debug.Log("move box to:" + destination);
     }
+    public bool isMoving(){
+        return (DOTween.IsTweening(transform));
+    }
+
 }
