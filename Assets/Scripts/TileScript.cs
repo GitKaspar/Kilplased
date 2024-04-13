@@ -16,6 +16,10 @@ public class TileScript : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, destination, speed);
+        if (transform.position != destination )
+        {
+            isMoving = true;
+        }
     }
 
     void SetDestination(Vector3 newPos)
