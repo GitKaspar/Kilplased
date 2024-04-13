@@ -118,3 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a71a86cb06a1464393da7dc03a0ac8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xGridStep: 8
+  zGridStep: 8

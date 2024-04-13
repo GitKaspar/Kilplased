@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 
 public class GridParser : MonoBehaviour
 {
   
     public List<GameObject> tiles;
+    public GameObject ButtonPrefab;
     public int yoffset = 0;
     public int xGridStep = 8;
     public int zGridStep = 8;
@@ -37,7 +39,12 @@ public class GridParser : MonoBehaviour
             for (int j = 0; j < gridSize[1]; j++)
             {
                 gridVectors[i,j] = new Vector3((i)*xGridStep+xGridStep/2 - xGridStep*gridSize[0]/2,yoffset ,j*zGridStep+zGridStep/2 - zGridStep*gridSize[1]/2);
-                //Debug.Log(gridVectors[i,j]);
+                 
+                Debug.Log(gridVectors[i,j]);
+                if(i < gridSize[0] - 1 && j < gridSize[1] - 1)
+                {
+                    GenerateNewButton(gridVectors[i, j].x + xGridStep/2, gridVectors[i, j].z + zGridStep/2);
+                }
             }
         }
         //Populate board state with GenerateNewTile
@@ -48,7 +55,6 @@ public class GridParser : MonoBehaviour
         // Parse over the grid
         //ParseGrid();
     }
-
 
     void ParseGridFall()
     {
@@ -262,4 +268,10 @@ public class GridParser : MonoBehaviour
         searchForPatterns(x,y);
 
     }
+    void GenerateNewButton(float x, float z)
+    {
+        GameObject.Instantiate(ButtonPrefab, new Vector3(x, 0, z), Quaternion.identity);
+    }
 }
+
+
