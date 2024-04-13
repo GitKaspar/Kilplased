@@ -98,7 +98,7 @@ public class GridParser : MonoBehaviour
             grid[targeti,targetj] = grid[i,j];
             grid[i,j] = 0;
             väljaolek[targeti,targetj] = väljaolek[i,j];
-            väljaolek[i,j].SetDestination();
+//            väljaolek[i,j].GetComponent<TileScript>().SetDestination(new Vector3());
         } 
 
     }
