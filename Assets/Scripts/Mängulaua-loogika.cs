@@ -48,6 +48,37 @@ public class GridParser : MonoBehaviour
         //ParseGrid();
     }
 
+    /*
+    private Effect[] searchForPatterns(int x, int y)
+    {
+
+        for (int a = 0; a < 2; a++)
+        {
+            for (int b = 0; b < 2; b++)
+            {
+                if (grid[x + a, y + b] == 1)
+                {
+                    //basic triangle
+                    //in bounds?
+                    if (0 <= x + a + 1 < gridSize[0] & 0 <= y + b + 2 < gridSize[1])
+                    {
+                        if (grid[x + a + 1, y + b + 2] == 1)
+                        {
+                            if (0 <= x + a - 1 < gridSize[0] & 0 <= y + b + 2 < gridSize[1])
+                            {
+                                if (grid[x + a - 1, y + b + 2] == 1)
+                                {
+                                    //add effect Triangle to buffer with direction down
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    */
 
     void ParseGridFall()
     {
@@ -116,5 +147,6 @@ public class GridParser : MonoBehaviour
             }
         }
     }
-
 }
+
+
