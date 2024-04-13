@@ -9,10 +9,16 @@ public class AudioController : MonoBehaviour
     private AudioSource m_AudioSource;
 
     public AudioClipGroup KauriPala;
-    public AudioClip KauriPalaTest;
+    public AudioClipGroup Click;
 
     private void Awake()
     {
+        if (AudioInstance != null)
+        {
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
         AudioInstance = this;
     }
 

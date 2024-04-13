@@ -8,10 +8,12 @@ public class MenuController : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
+        AudioController.AudioInstance.Click.Play();
     }
 
     public void ExitGame()
     {
+        AudioController.AudioInstance.Click.Play();
         Application.Quit();
     }
 }
