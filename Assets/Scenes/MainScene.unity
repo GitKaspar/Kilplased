@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 786904452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: -14.2, z: 0}
   m_LocalScale: {x: 64, y: 1, z: 64}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 1920440627}
   - component: {fileID: 1920440626}
   - component: {fileID: 1920440625}
+  - component: {fileID: 1920440629}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -559,11 +560,34 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 15}
+  m_LocalScale: {x: 6.5, y: 1, z: 6.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920440629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920440624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbc5497995ac2f49bf0e675b709ffe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 3531831021340352712, guid: c98011e65abee034caaa77b367b42214, type: 3}
+  - {fileID: 3389856775369897586, guid: 17185accc3b574849800c2b456625e8b, type: 3}
+  - {fileID: 1447084009409076609, guid: 0805363ef40f06146a4a19eb9f73b3dd, type: 3}
+  - {fileID: 3892225566534562537, guid: 94fec2e5855c9dd439cb4884ad43b630, type: 3}
+  - {fileID: 3105022449151747036, guid: 9fe42ff354c9cbb419b38ac259c8471e, type: 3}
+  - {fileID: 3967065926468528231, guid: a6898e85c9f5c134e9cacc144e631e2b, type: 3}
+  yoffset: 0
+  xGridStep: 8
+  zGridStep: 8
+  gridSize: 0800000008000000
 --- !u!1 &2007645983
 GameObject:
   m_ObjectHideFlags: 0
