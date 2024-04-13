@@ -22,7 +22,7 @@ public class TileScript : MonoBehaviour
         }
     }
 
-    void SetDestination(Vector3 newPos)
+    public void SetDestination(Vector3 newPos)
     {
         destination = newPos;
     }
