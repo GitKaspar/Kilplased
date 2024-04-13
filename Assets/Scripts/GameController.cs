@@ -5,16 +5,13 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    private AudioSource mainSceneAudio;
-    // Start is called before the first frame update
     void Start()
     {
-        
+        AudioController.AudioInstance.KauriPala.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        AudioController.AudioInstance.KauriPala.Stop();
     }
 }

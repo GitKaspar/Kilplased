@@ -29,6 +29,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         AudioController.AudioInstance.Click.Play();
+        Debug.Log("Peaks mängima heli: jätka");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -37,6 +38,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         AudioController.AudioInstance.Click.Play();
+        Debug.Log("Peaks mängima heli: paus");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;

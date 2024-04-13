@@ -25,7 +25,7 @@ public class ClickOnObject : MonoBehaviour
         if (PauseMenu.GameIsPaused == false)
         {
             UnityEngine.Debug.Log(transform.position);
-            AudioController.AudioInstance.Click.Play();
+            AudioController.AudioInstance.SoDumb.Play();
         }
     }
 
