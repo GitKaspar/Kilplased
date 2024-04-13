@@ -53,7 +53,6 @@ public class AudioClipGroup : ScriptableObject
     {
         if (source.isPlaying)
         { source.Stop(); }
-
     }
 
     public void Stop()
@@ -66,5 +65,7 @@ public class AudioClipGroup : ScriptableObject
     {
         VolumeMin = volume;
         VolumeMax = volume;
+        
     }
+   
 }
