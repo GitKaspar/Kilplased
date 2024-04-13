@@ -11,22 +11,17 @@ public class AudioController : MonoBehaviour
     public AudioClipGroup KauriPala;
     public AudioClipGroup Click;
 
-    private void Awake()
-    {
-        if (AudioInstance != null)
-        {
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-        AudioInstance = this;
-    }
-
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene")
+        if (AudioInstance == null)
         {
-            KauriPala.Play();
+            AudioInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (AudioInstance != this)
+        {
+            Destroy(AudioInstance.gameObject);
         }
     }
+
 }
