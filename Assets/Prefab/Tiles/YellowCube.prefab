@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 751618190055750840}
   - component: {fileID: 323548071993665905}
   - component: {fileID: 4500076715956743936}
+  - component: {fileID: 4053497706224037854}
   m_Layer: 0
   m_Name: YellowCube
   m_TagString: Untagged
@@ -105,3 +106,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4053497706224037854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892225566534562537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40a9221bb810d34f9cf18ff3a672fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.01

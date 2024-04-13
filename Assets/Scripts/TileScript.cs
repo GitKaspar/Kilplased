@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmoothMove : MonoBehaviour
+public class TileScript : MonoBehaviour
 {
     public float speed = 0.01f;
     private Vector3 destination;
+    private bool isMoving;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class SmoothMove : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, destination, speed);  
+        transform.position = Vector3.Lerp(transform.position, destination, speed);
     }
 
     void SetDestination(Vector3 newPos)
