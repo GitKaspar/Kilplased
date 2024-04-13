@@ -2,35 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using DG.Tweening;
 
 public class ClickOnObject : MonoBehaviour
 {
-    public int xGridStep;
-    public int zGridStep;
-    private float xIndeks;
-    private float zIndeks;
-    float[] coordinates = new float[2];
+    private int xGridStep;
+    private int zGridStep;
+    private int xIndeks;
+    private int zIndeks;
+    Vector3 coordinates;
 
     private void Awake()
     {
         // Indeksi mate on vale. Vaja robustsemat lahendust.
-        xIndeks = transform.position.x - xGridStep;
-        zIndeks = transform.position.z - zGridStep;
-        coordinates[0] = xIndeks;
-        coordinates[1] = zIndeks;
+        xGridStep = gameObject.GetComponentInParent<loogika>().xGridStep;
+        zGridStep = gameObject.GetComponentInParent<loogika>().zGridStep;
+        xIndeks = (int)transform.position.x ;
+        zIndeks = (int)transform.position.z ;
+        coordinates = new Vector3(xIndeks*xGridStep+xGridStep - xGridStep*gameObject.GetComponentInParent<loogika>().gridSize[0]/2,gameObject.GetComponentInParent<loogika>().yoffset ,zIndeks*zGridStep+zGridStep - zGridStep*gameObject.GetComponentInParent<loogika>().gridSize[1]/2);;
+        transform.SetPositionAndRotation(coordinates , Quaternion.identity);
     }
 
     void OnMouseDown()
     {
         if (PauseMenu.GameIsPaused == false)
         {
-            UnityEngine.Debug.Log(transform.position);
+            //UnityEngine.Debug.Log(transform.position);
+            gameObject.GetComponentInParent<loogika>().ImputPress(xIndeks,zIndeks);
             AudioController.AudioInstance.Click.Play();
         }
-    }
-
-    public float[] ReturnLowerLeftSquareCoordinates()
-    {
-        return coordinates;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Jobs;
 using UnityEngine;
 
-public class GridParser : MonoBehaviour
+public class loogika : MonoBehaviour
 {
   
     public List<GameObject> tiles;
@@ -41,9 +41,9 @@ public class GridParser : MonoBehaviour
                 gridVectors[i,j] = new Vector3((i)*xGridStep+xGridStep/2 - xGridStep*gridSize[0]/2,yoffset ,j*zGridStep+zGridStep/2 - zGridStep*gridSize[1]/2);
                  
                 Debug.Log(gridVectors[i,j]);
-                if(i < gridSize[0] - 1 && j < gridSize[1] - 1)
+                if(i < gridSize[0]  && j < gridSize[1] )
                 {
-                    GenerateNewButton(gridVectors[i, j].x + xGridStep/2, gridVectors[i, j].z + zGridStep/2);
+                    GenerateNewButton(i,j);
                 }
             }
         }
@@ -55,6 +55,12 @@ public class GridParser : MonoBehaviour
         // Parse over the grid
         //ParseGrid();
     }
+
+    void GenerateNewButton(float x, float z)
+    {
+        GameObject.Instantiate(ButtonPrefab, new Vector3(x, 0, z), Quaternion.identity, this.transform);
+    }
+
 
     void ParseGridFall()
     {
@@ -99,13 +105,14 @@ public class GridParser : MonoBehaviour
         ParseGridFall();
     }
     void MoveTile(int i,int j, int targeti,int targetj){
-        if (grid[i,j] != 0 & grid[targeti,targetj] == 0)
+        if (grid[targeti,targetj] == 0)
         {
             grid[targeti,targetj] = grid[i,j];
             grid[i,j] = 0;
             väljaolek[targeti,targetj] = väljaolek[i,j];
             //Debug.Log( gridVectors[targeti,targetj]);
             väljaolek[i,j].GetComponent<TileScript>().SetDestination(gridVectors[targeti,targetj]);
+            väljaolek[i,j] = null;
         } 
 
     }
@@ -202,6 +209,7 @@ public class GridParser : MonoBehaviour
     private void destroy(int x,int y)
     {
         grid[x,y] = 0;
+        Destroy(väljaolek[x,y]);
         ParseGridFall();
     }
     private void applyEffects(List<EffectStruct> EffectList){
@@ -265,13 +273,38 @@ public class GridParser : MonoBehaviour
         }
     }
     public void ImputPress(int x, int y){
-        searchForPatterns(x,y);
+        // TODO: decrement energy resource
+        int[] jugglerIds = new int[] {grid[x,y],grid[x,y+1],grid[x+1,y+1],grid[x+1,y]};
+
+        GameObject[] juggleObjects = {väljaolek[x,y],väljaolek[x,y+1],väljaolek[x+1,y+1],väljaolek[x+1,y]};
+        
+        grid[x,y] = 0;
+        grid[x,y+1] = 0;
+        grid[x+1,y+1] = 0;
+        grid[x+1,y] = 0;
+        
+        //MoveTile(x,y,x,y+1);
+        juggleObjects[0].GetComponent<TileScript>().SetDestination(gridVectors[x,y+1]);
+        //MoveTile(x+1,y,x,y);
+        juggleObjects[1].GetComponent<TileScript>().SetDestination(gridVectors[x+1,y+1]);
+        //MoveTile(x+1,y+1,x+1,y);
+        juggleObjects[2].GetComponent<TileScript>().SetDestination(gridVectors[x+1,y]);
+        //MoveTile(x,y+1,x+1,y+1);
+        juggleObjects[3].GetComponent<TileScript>().SetDestination(gridVectors[x,y]);
+        
+        grid[x,y] = jugglerIds[3];
+        grid[x,y+1] = jugglerIds[0];
+        grid[x+1,y+1] = jugglerIds[1];
+        grid[x+1,y] = jugglerIds[2];
+
+        väljaolek[x,y] = juggleObjects[3];
+        väljaolek[x,y+1] = juggleObjects[0];
+        väljaolek[x+1,y+1] = juggleObjects[1];
+        väljaolek[x+1,y] = juggleObjects[2];
+        
+        applyEffects(searchForPatterns(x,y));
+        //TODO Check for Game Over
 
     }
-    void GenerateNewButton(float x, float z)
-    {
-        GameObject.Instantiate(ButtonPrefab, new Vector3(x, 0, z), Quaternion.identity);
-    }
+
 }
-
-
