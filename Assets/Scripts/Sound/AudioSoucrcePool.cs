@@ -21,7 +21,6 @@ public class AudioSourcePool : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         audioSources = new List<AudioSource>();
-        Instance = this;
     }
 
     public AudioSource GetSource()
