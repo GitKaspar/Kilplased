@@ -13,13 +13,7 @@ public class AudioSourcePool : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
+        Instance = this;
         audioSources = new List<AudioSource>();
     }
 

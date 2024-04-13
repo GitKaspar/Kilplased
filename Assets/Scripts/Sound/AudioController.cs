@@ -6,25 +6,21 @@ using UnityEngine.SceneManagement;
 public class AudioController : MonoBehaviour
 {
     public static AudioController AudioInstance;
-    private AudioSource buttonAudioSource;
+    private AudioSource m_AudioSource;
 
     public AudioClipGroup KauriPala;
     public AudioClip KauriPalaTest;
 
     private void Awake()
     {
-
-        if (AudioInstance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
         AudioInstance = this;
+    }
 
-        buttonAudioSource = GetComponent<AudioSource>(); //need own audiosource for buttons so that buttons sounds still work when game is paused
-        buttonAudioSource.ignoreListenerPause = true;
-
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            KauriPala.Play();
+        }
     }
 }
