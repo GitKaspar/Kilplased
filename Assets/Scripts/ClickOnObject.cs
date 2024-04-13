@@ -29,7 +29,7 @@ public class ClickOnObject : MonoBehaviour
         {
             //UnityEngine.Debug.Log(transform.position);
             gameObject.GetComponentInParent<loogika>().ImputPress(xIndeks,zIndeks);
-            AudioController.AudioInstance.Click.Play();
+            AudioController.AudioInstance.SoDumb.Play();
         }
     }
 }

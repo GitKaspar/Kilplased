@@ -509,6 +509,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KauriPala: {fileID: 11400000, guid: a2b33a42fc35b464c98f793799c2a37d, type: 2}
   Click: {fileID: 11400000, guid: e9f9ddb49ca79c5408573ae4f69e44a1, type: 2}
+  SampleMusic: {fileID: 11400000, guid: d16b177c58f06f44498a23d35ba6feaa, type: 2}
+  SoDumb: {fileID: 11400000, guid: a0d1f1b08884cba48b65c21fd3f9b4b0, type: 2}
+  Mungad: {fileID: 11400000, guid: 393d6ec7d3fa6fd449a5b7027920a8d5, type: 2}
+  Harf: {fileID: 11400000, guid: e94d6fbfb26fd75479a6ef21fb15b523, type: 2}
 --- !u!114 &907362428
 MonoBehaviour:
   m_ObjectHideFlags: 0

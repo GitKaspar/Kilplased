@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 public class AudioController : MonoBehaviour
 {
     public static AudioController AudioInstance;
-    private AudioSource m_AudioSource;
 
     public AudioClipGroup KauriPala;
     public AudioClipGroup Click;
+    public AudioClipGroup SampleMusic;
+    public AudioClipGroup SoDumb;
+    public AudioClipGroup Mungad;
+    public AudioClipGroup Harf;
 
     private void Start()
     {
