@@ -10,7 +10,7 @@ public class AudioSourcePool : MonoBehaviour
     public AudioSource AudioSourcePrefab;
 
     private List<AudioSource> audioSources;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -30,5 +30,13 @@ public class AudioSourcePool : MonoBehaviour
         audioSources.Add(newSource);
 
         return newSource;
+    }
+
+    public void StopAll()
+    {
+        foreach (AudioSource source in audioSources)
+        {
+            source.Stop();
+        }
     }
 }
