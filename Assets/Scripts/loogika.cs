@@ -16,6 +16,7 @@ public class loogika : MonoBehaviour
     public int xGridStep = 8;
     public int zGridStep = 8;
     public List<int> gridSize = new List<int> {8,8};
+    private Camera camera;
 
     private Vector3 BoardPosition;
 
@@ -32,7 +33,7 @@ public class loogika : MonoBehaviour
         pauseMenu = FindObjectOfType<PauseMenu>();
         pauseMenu.SetEnergy(startingEnergy);
         pauseMenu.SetScore(0);
-
+        camera = Camera.main;
 
         energy = startingEnergy;
         BoardPosition = transform.position;
@@ -71,7 +72,34 @@ public class loogika : MonoBehaviour
         // Parse over the grid
         //ParseGrid();
     }
+     void Update()
+    {
+       DetectObjectWithRaycast();
+    }
 
+    public void DetectObjectWithRaycast()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                ClickOnObject clickObject;
+                
+                    hit.collider.TryGetComponent<ClickOnObject>(out clickObject);
+                    if (clickObject != null)
+                    {
+                    clickObject.OnClick();
+                        
+                    }
+                
+                Debug.Log($"{hit.collider.name} Detected",
+                    hit.collider.gameObject);
+            }
+        }
+    }
     void GenerateNewButton(float x, float z)
     {
         GameObject.Instantiate(ButtonPrefab, new Vector3(x, 0, z), Quaternion.identity, this.transform);
@@ -164,6 +192,8 @@ public class loogika : MonoBehaviour
                     //int inilvl = grid[x+a,y+b];
                     //basic triangle
                     //in bounds?
+                    
+                    Debug.Log("looking for type 1");
                     energy++;
                     if (0<=x+a+1 & x+a+1<gridSize[0] & 0<=y+b-2 & y+b-2<gridSize[1])
                     {
@@ -227,7 +257,7 @@ public class loogika : MonoBehaviour
                 }
                 if (grid[x+a,y+b] == 2)
                 {
-                    energy++;
+                    Debug.Log("looking for type 2 squear");
                     if (x+a+2<gridSize[0] & y+b+2<gridSize[1])
                     {
                         if (grid[x+a+2,y+b]==2)
@@ -285,6 +315,8 @@ public class loogika : MonoBehaviour
                             }
                         }
                     }
+                    
+                    Debug.Log("looking for type 2 cross");
                     
                     if (1<=x+a & x+a+1<gridSize[0] & y+b+2<gridSize[1])
                     {
@@ -369,6 +401,8 @@ public class loogika : MonoBehaviour
     private void ApplyEffects(List<EffectStruct> EffectList){
         foreach (EffectStruct effect in EffectList)
         {
+            
+        Debug.Log("appling effects");
             if (effect.type == 0)
             {
                 // effect.direction 
@@ -376,6 +410,7 @@ public class loogika : MonoBehaviour
                 // 1 = left
                 // 2 = down
                 // 3 = left
+                
                 if (effect.direction == 0)
                 {
                     if (effect.y != gridSize[1] - 1 )
@@ -435,24 +470,30 @@ public class loogika : MonoBehaviour
             {
                 if (effect.direction == 0)
                 {
+                    
+                    Debug.Log("t1d0");
                     upgrade(effect.x+1,effect.y+1); 
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 1)
                 {
+                    
+                    Debug.Log("t1d1");
                     upgrade(effect.x+1,effect.y-1);
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 2)
                 {
+                    Debug.Log("t1d2");
                     upgrade(effect.x-1,effect.y-1);
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 3)
                 {
+                    Debug.Log("t1d3");
                     upgrade(effect.x-1,effect.y+1);
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
@@ -461,7 +502,8 @@ public class loogika : MonoBehaviour
             if (effect.type == 2)
             {
                 if (effect.direction == 0)
-                {
+                {   
+                    Debug.Log("t2d0");
                     upgrade(effect.x+1,effect.y+1);
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
@@ -470,6 +512,7 @@ public class loogika : MonoBehaviour
                 }
                 else if (effect.direction == 1)
                 {
+                    Debug.Log("t2d1");
                     upgrade(effect.x+1,effect.y-1);
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                     swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
@@ -478,6 +521,7 @@ public class loogika : MonoBehaviour
                 }
                 else if (effect.direction == 2)
                 {
+                    Debug.Log("t2d2");
                     upgrade(effect.x-1,effect.y-1);
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
@@ -486,6 +530,7 @@ public class loogika : MonoBehaviour
                 }
                 else if (effect.direction == 3)
                 {
+                    Debug.Log("t2d3");
                     upgrade(effect.x-1,effect.y+1);
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                     swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
@@ -496,6 +541,8 @@ public class loogika : MonoBehaviour
         }
     }
     public void ImputPress(int x, int y){
+        
+        Debug.Log("Click");
         energy--;
         pauseMenu.SetEnergy(energy);
 
@@ -526,12 +573,14 @@ public class loogika : MonoBehaviour
         väljaolek[x,y+1] = juggleObjects[0];
         väljaolek[x+1,y+1] = juggleObjects[1];
         väljaolek[x+1,y] = juggleObjects[2];
+        Debug.Log("looking for patterns");
         List<EffectStruct> patterns = searchForPatterns(x,y);
-        while (patterns.Count>0)
-        {  
+        Debug.Log("done" + patterns.Count);
+        //while (patterns.Count>0)
+        //{  
         ApplyEffects(patterns);
         //patterns = searchForPatterns(x,y);
-        }
+        //}
         //applyEffects(searchForPatterns(x,y));
         if (energy < 1)
         {

@@ -23,13 +23,18 @@ public class ClickOnObject : MonoBehaviour
         transform.SetPositionAndRotation(coordinates , Quaternion.identity);
     }
 
-    void OnMouseDown()
+    public void OnClick()
+    {
+            gameObject.GetComponentInParent<loogika>().ImputPress(xIndeks,zIndeks);
+    }
+/*    void OnMouseDown()
     {
         if (PauseMenu.GameIsPaused == false)
         {
             //UnityEngine.Debug.Log(transform.position);
+            Debug.Log("Click responce");
             gameObject.GetComponentInParent<loogika>().ImputPress(xIndeks,zIndeks);
             AudioController.AudioInstance.SoDumb.Play();
         }
-    }
+    }*/
 }
