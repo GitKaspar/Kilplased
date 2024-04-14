@@ -24,10 +24,10 @@ public class TileScript : MonoBehaviour
         {
             if (line)
             {
-                seq.Append(transform.DOMove(destination, 1f).SetEase(Ease.InOutQuad));
+                seq.Append(transform.DOMove(destination, 2f).SetEase(Ease.InOutQuad));
             }
             else{
-                seq.Join(transform.DOMove(destination, 1f).SetEase(Ease.InOutQuad));
+                seq.Join(transform.DOMove(destination, 2f).SetEase(Ease.InOutQuad));
             }
             
         }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using DG.Tweening;
 using Unity.Jobs;
 using UnityEngine;
@@ -77,7 +79,7 @@ public class loogika : MonoBehaviour
         {
             return;
         }
-        int uus = Random.Range(1, 4);
+        int uus = UnityEngine.Random.Range(1, 4);
         grid[i, 7] = uus;
         // Spawn new tile GameObject
         Vector3 position = gridVectors[i,gridSize[1]];
@@ -128,6 +130,23 @@ public class loogika : MonoBehaviour
         } 
 
     }
+        void moveToPosition(int x,int y){
+        
+            väljaolek[x,y].GetComponent<TileScript>().SetDestination(gridVectors[x,y]);
+
+    }
+    private void swap(int x1, int y1, int x2, int y2)
+    {
+        int hold = grid[x1,y1];
+        grid[x1,y1] = grid[x2,y2];
+        grid[x2,y2] = hold;
+
+        GameObject GOhold = väljaolek[x1,y1];
+        väljaolek[x1,y1] = väljaolek[x2,y2];
+        väljaolek[x2,y2] = GOhold;
+        moveToPosition(x1,y1);
+        moveToPosition(x2,y2);
+    }
 
     private List<EffectStruct> searchForPatterns(int x,int y){
         List<EffectStruct> effectList = new List<EffectStruct>{}; 
@@ -140,7 +159,7 @@ public class loogika : MonoBehaviour
                     //int inilvl = grid[x+a,y+b];
                     //basic triangle
                     //in bounds?
-
+                    energy++;
                     if (0<=x+a+1 & x+a+1<gridSize[0] & 0<=y+b-2 & y+b-2<gridSize[1])
                     {
                         if (grid[x+a+1,y+b-2]==1)
@@ -203,6 +222,7 @@ public class loogika : MonoBehaviour
                 }
                 if (grid[x+a,y+b] == 2)
                 {
+                    energy++;
                     if (x+a+2<gridSize[0] & y+b+2<gridSize[1])
                     {
                         if (grid[x+a+2,y+b]==2)
@@ -260,7 +280,67 @@ public class loogika : MonoBehaviour
                             }
                         }
                     }
+                    
+                    if (1<=x+a & x+a+1<gridSize[0] & y+b+2<gridSize[1])
+                    {
+                        if (grid[x+a-1,y+b+1]==2)
+                        {
+                            if (grid[x+a,y+b+2]==2)
+                            {
+                                if (grid[x+a+1,y+b+1]==2)
+                                {
+                                    //add effect Cross to buffer with direction N
+                                    effectList.Add(new EffectStruct(x+a,y+b,0,2)); 
+                                }
+                            }
+                        }
+                    }
+                    if (x+a+2<gridSize[0] & 1<=y+b & y+b+1<gridSize[1])
+                    {
+                        if (grid[x+a+1,y+b+1]==2)
+                        {
+                            if (grid[x+a+2,y+b]==2)
+                            {
+                                if (grid[x+a+1,y+b-1]==2)
+                                {
+                                    //add effect Cross to buffer with direction E
+                                    effectList.Add(new EffectStruct(x+a,y+b,1,2));
+                                }
+                            }
+                        }
+                    }
+                    if (1<=x+a & x+a+1<gridSize[0] & 2<=y-b)
+                    {
+                        if (grid[x+a+1,y+b-1]==2)
+                        {
+                            if (grid[x+a,y+b-2]==2)
+                            {
+                                if (grid[x+a-1,y+b-1]==2)
+                                {
+                                    //add effect Cross to buffer with direction S
+                                    effectList.Add(new EffectStruct(x+a,y+b,2,2));
+                                }
+                            }   
+                            
+                        }
+                    }
+                    if (2<=x+a & 1<=y+b & y+b+1<gridSize[1])
+                    {
+                        if (grid[x+a-1,y+b-1]==2)
+                        {
+                            if (grid[x+a-2,y+b]==2)
+                            {
+                                if (grid[x+a-1,y+b+1]==2)
+                                {
+                                    //add effect Cross to buffer with direction W
+                                    effectList.Add(new EffectStruct(x+a,y+b,3,2));
+                                }
+                            }
+                        }
+                    }
+
                 }
+
             }
         }
         return(effectList);
@@ -281,7 +361,7 @@ public class loogika : MonoBehaviour
             väljaolek[x,y] = Instantiate(tiles[grid[x,y]], gridVectors[x,y], Quaternion.identity, this.transform);
         }
     }
-    private void applyEffects(List<EffectStruct> EffectList){
+    private void ApplyEffects(List<EffectStruct> EffectList){
         foreach (EffectStruct effect in EffectList)
         {
             if (effect.type == 0)
@@ -296,6 +376,8 @@ public class loogika : MonoBehaviour
                     if (effect.y != gridSize[1] - 1 )
                     {
                         destroy(effect.x,effect.y+1);
+                        swap(effect.x-1,effect.y-2,effect.x-1,effect.y-1);
+                        swap(effect.x+1,effect.y-2,effect.x+1,effect.y-1);
                         if (effect.y != gridSize[1] - 2 )
                         {
                             destroy(effect.x,effect.y+2);
@@ -307,6 +389,8 @@ public class loogika : MonoBehaviour
                     if (effect.x != gridSize[0] - 1 )
                     {
                         destroy(effect.x+1,effect.y);
+                        swap(effect.x-2,effect.y-1,effect.x-1,effect.y-1);
+                        swap(effect.x-2,effect.y+1,effect.x-1,effect.y+1);
                         if (effect.x != gridSize[0] - 2)
                         {
                             destroy(effect.x+2,effect.y);
@@ -319,6 +403,8 @@ public class loogika : MonoBehaviour
                     if (effect.y != 0 )
                     {
                         destroy(effect.x,effect.y-1);
+                        swap(effect.x-1,effect.y+2,effect.x-1,effect.y+1);
+                        swap(effect.x+1,effect.y+2,effect.x+1,effect.y+1);
                         if (effect.y != 1 )
                         {
                             destroy(effect.x,effect.y-2);
@@ -331,6 +417,8 @@ public class loogika : MonoBehaviour
                     if (effect.x != 0 )
                     {
                         destroy(effect.x-1,effect.y);
+                        swap(effect.x+2,effect.y-1,effect.x+1,effect.y-1);
+                        swap(effect.x+2,effect.y+1,effect.x+1,effect.y+1);
                         if (effect.x != 1)
                         {
                             destroy(effect.x-2,effect.y);
@@ -338,23 +426,66 @@ public class loogika : MonoBehaviour
                     }
                 }
             }
-             if (effect.type == 1)
+            if (effect.type == 1)
             {
                 if (effect.direction == 0)
                 {
-                    upgrade(effect.x+1,effect.y+1);
+                    upgrade(effect.x+1,effect.y+1); 
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 1)
                 {
                     upgrade(effect.x+1,effect.y-1);
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 2)
                 {
                     upgrade(effect.x-1,effect.y-1);
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
                 }
                 else if (effect.direction == 3)
                 {
                     upgrade(effect.x-1,effect.y+1);
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                } 
+            }
+            if (effect.type == 2)
+            {
+                if (effect.direction == 0)
+                {
+                    upgrade(effect.x+1,effect.y+1);
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                }
+                else if (effect.direction == 1)
+                {
+                    upgrade(effect.x+1,effect.y-1);
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                }
+                else if (effect.direction == 2)
+                {
+                    upgrade(effect.x-1,effect.y-1);
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                }
+                else if (effect.direction == 3)
+                {
+                    upgrade(effect.x-1,effect.y+1);
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
                 } 
             }
         }
@@ -388,7 +519,13 @@ public class loogika : MonoBehaviour
         väljaolek[x,y+1] = juggleObjects[0];
         väljaolek[x+1,y+1] = juggleObjects[1];
         väljaolek[x+1,y] = juggleObjects[2];
-        applyEffects(searchForPatterns(x,y));
+        List<EffectStruct> patterns = searchForPatterns(x,y);
+        while (patterns.Count>0)
+        {  
+        ApplyEffects(patterns);
+        //patterns = searchForPatterns(x,y);
+        }
+        //applyEffects(searchForPatterns(x,y));
         if (energy < 1)
         {
             //TODO Game Over
