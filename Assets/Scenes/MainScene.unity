@@ -1961,7 +1961,7 @@ MonoBehaviour:
   - {fileID: 3389856775369897586, guid: 3d9c3fe63f04de04180ece0dc7c37638, type: 3}
   - {fileID: 3389856775369897586, guid: 0bf1a62950a840c488c01884f44c3a8f, type: 3}
   ButtonPrefab: {fileID: 7138595464582318942, guid: 9a77046c227bf894abf37614d611846e, type: 3}
-  yoffset: 0
+  yoffset: 1
   xGridStep: 8
   zGridStep: 8
   gridSize: 0800000008000000
