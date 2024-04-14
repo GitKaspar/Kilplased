@@ -1874,7 +1874,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8415889214960963161, guid: c7112cfa709841b4badbc0b3ca7aab9b, type: 3}
 --- !u!23 &1920440626
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1955,12 +1955,11 @@ MonoBehaviour:
   startingEnergy: 10
   energy: 0
   tiles:
-  - {fileID: 3531831021340352712, guid: c98011e65abee034caaa77b367b42214, type: 3}
+  - {fileID: 3389856775369897586, guid: ad0e2b246b7135a469164db4441dcc9b, type: 3}
+  - {fileID: 3389856775369897586, guid: 76ba27ea9e8de0a4abfc47d0001a676e, type: 3}
   - {fileID: 3389856775369897586, guid: 4947bb9dece66f540b77b39a1c9f0183, type: 3}
-  - {fileID: 1447084009409076609, guid: 0805363ef40f06146a4a19eb9f73b3dd, type: 3}
-  - {fileID: 3892225566534562537, guid: 94fec2e5855c9dd439cb4884ad43b630, type: 3}
-  - {fileID: 3105022449151747036, guid: 9fe42ff354c9cbb419b38ac259c8471e, type: 3}
-  - {fileID: 3967065926468528231, guid: a6898e85c9f5c134e9cacc144e631e2b, type: 3}
+  - {fileID: 3389856775369897586, guid: 3d9c3fe63f04de04180ece0dc7c37638, type: 3}
+  - {fileID: 3389856775369897586, guid: 0bf1a62950a840c488c01884f44c3a8f, type: 3}
   ButtonPrefab: {fileID: 7138595464582318942, guid: 9a77046c227bf894abf37614d611846e, type: 3}
   yoffset: 0
   xGridStep: 8
