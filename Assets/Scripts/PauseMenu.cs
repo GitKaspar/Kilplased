@@ -71,7 +71,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GameOver()
     {
-        AudioController.AudioInstance.Click.Play();
+        AudioController.AudioInstance.Sigh.Play();
         gameOverMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;

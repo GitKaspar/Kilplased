@@ -13,6 +13,7 @@ public class AudioController : MonoBehaviour
     public AudioClipGroup SoDumb;
     public AudioClipGroup Mungad;
     public AudioClipGroup Harf;
+    public AudioClipGroup Sigh;
 
     private void Start()
     {
