@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Jobs;
 using UnityEngine;
 
 public class loogika : MonoBehaviour
 {
-  
+    public int startingEnergy = 10;
+    public int energy;
     public List<GameObject> tiles;
     public GameObject ButtonPrefab;
-    public int yoffset = 0;
+    public int yoffset = 2;
     public int xGridStep = 8;
     public int zGridStep = 8;
     public List<int> gridSize = new List<int> {8,8};
@@ -20,8 +22,12 @@ public class loogika : MonoBehaviour
     private Vector3[,] gridVectors;
     private GameObject[,] väljaolek;
 
+    Sequence seq;
+
     void Start()
     {
+        
+        energy = startingEnergy;
         BoardPosition = transform.position;
         grid = new int[gridSize[0], gridSize[1]];
          for (int a = 0; a < gridSize[0]; a++)
@@ -31,16 +37,16 @@ public class loogika : MonoBehaviour
                 grid[a,b] = 0;
             }
         }
-        gridVectors = new Vector3[gridSize[0], gridSize[1]];
+        gridVectors = new Vector3[gridSize[0], gridSize[1]+1];
         väljaolek = new GameObject[gridSize[0], gridSize[1]];
         // Calculate grid positions
         for (int i = 0; i < gridSize[0]; i++)
         {
-            for (int j = 0; j < gridSize[1]; j++)
+            for (int j = 0; j <= gridSize[1]; j++)
             {
                 gridVectors[i,j] = new Vector3((i)*xGridStep+xGridStep/2 - xGridStep*gridSize[0]/2,yoffset ,j*zGridStep+zGridStep/2 - zGridStep*gridSize[1]/2);
                  
-                Debug.Log(gridVectors[i,j]);
+                //Debug.Log(gridVectors[i,j]);
                 if(i < gridSize[0]  && j < gridSize[1] )
                 {
                     GenerateNewButton(i,j);
@@ -48,9 +54,12 @@ public class loogika : MonoBehaviour
             }
         }
         //Populate board state with GenerateNewTile
-        for (int i = 0; i < gridSize[0]; i++)
+        for (int j = 0; j < gridSize[1]; j++)
         {
-            GenerateNewTile(i);
+            for (int i = 0; i < gridSize[0]; i++)
+            {
+                GenerateNewTile(i);
+            }
         }
         // Parse over the grid
         //ParseGrid();
@@ -61,7 +70,24 @@ public class loogika : MonoBehaviour
         GameObject.Instantiate(ButtonPrefab, new Vector3(x, 0, z), Quaternion.identity, this.transform);
     }
 
-
+    void GenerateNewTile(int i)
+    {
+        // Check if empty
+        if (grid[i, gridSize[1]-1] != 0)
+        {
+            return;
+        }
+        int uus = Random.Range(1, 4);
+        grid[i, 7] = uus;
+        // Spawn new tile GameObject
+        Vector3 position = gridVectors[i,gridSize[1]];
+        väljaolek[i,gridSize[1]-1] = Instantiate(tiles[uus], position, Quaternion.identity, this.transform);
+        for (int c = 0; c < gridSize[0]; c++)
+        {
+            väljaolek[i,gridSize[1]-1].GetComponent<TileScript>().SetDestination(gridVectors[i,gridSize[1]-1]);
+        }
+        ParseGridFall();
+    }
     void ParseGridFall()
     {
         // Iterate over the grid
@@ -88,22 +114,8 @@ public class loogika : MonoBehaviour
                 //Debug.Log();
             }
         }
+    }
 
-    }
-    void GenerateNewTile(int i)
-    {
-        // Check if empty
-        if (grid[i, gridSize[1]-1] != 0)
-        {
-            return;
-        }
-        int uus = Random.Range(1, 4);
-        grid[i, 7] = uus;
-        // Spawn new tile GameObject
-        Vector3 position = gridVectors[i,gridSize[1]-1];
-        väljaolek[i,gridSize[1]-1] = Instantiate(tiles[uus], position, Quaternion.identity, this.transform);
-        ParseGridFall();
-    }
     void MoveTile(int i,int j, int targeti,int targetj){
         if (grid[targeti,targetj] == 0)
         {
@@ -125,6 +137,7 @@ public class loogika : MonoBehaviour
             {
                 if (grid[x+a,y+b] == 1)
                 {
+                    //int inilvl = grid[x+a,y+b];
                     //basic triangle
                     //in bounds?
 
@@ -188,29 +201,85 @@ public class loogika : MonoBehaviour
                         }
                     }
                 }
+                if (grid[x+a,y+b] == 2)
+                {
+                    if (x+a+2<gridSize[0] & y+b+2<gridSize[1])
+                    {
+                        if (grid[x+a+2,y+b]==2)
+                        {
+                            if (grid[x+a+2,y+b+2]==2)
+                            {
+                                if (grid[x+a,y+b+2]==2)
+                                {
+                                    //add effect Square to buffer with direction NE
+                                    effectList.Add(new EffectStruct(x+a,y+b,0,1)); 
+                                }
+                            }
+                        }
+                    }
+                    if (x+a+2<gridSize[0] & 2<=y+b)
+                    {
+                        if (grid[x+a+2,y+b-2]==2)
+                        {
+                            if (grid[x+a+2,y+b-2]==2)
+                            {
+                                if (grid[x+a,y+b-2]==2)
+                                {
+                                    //add effect Square to buffer with direction SE
+                                    effectList.Add(new EffectStruct(x+a,y+b,1,1));
+                                }
+                            }
+                        }
+                    }
+                    if (2<=x+a & 2<=y+b)
+                    {
+                        if (grid[x+a-2,y+b]==2)
+                        {
+                            if (grid[x+a-2,y+b-2]==2)
+                            {
+                                if (grid[x+a,y+b-2]==2)
+                                {
+                                    //add effect Square to buffer with direction SW
+                                    effectList.Add(new EffectStruct(x+a,y+b,2,1));
+                                }
+                            }   
+                            
+                        }
+                    }
+                    if (2<=x+a & y+b+2<gridSize[1])
+                    {
+                        if (grid[x+a-2,y+b]==2)
+                        {
+                            if (grid[x+a-2,y+b+2]==2)
+                            {
+                                if (grid[x+a,y+b+2]==2)
+                                {
+                                    //add effect Square to buffer with direction NW
+                                    effectList.Add(new EffectStruct(x+a,y+b,3,1));
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         return(effectList);
     }
     
-    void ParseGrid()
-    {
-        // Iterate over the grid
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                // Perform operations on each cell
-                // For example, you might want to update the GameObject's position or color based on the grid value
-                //Debug.Log("Cell [" + i + ", " + j + "] has value: " + grid[i, j]);
-            }
-        }
-    }
     private void destroy(int x,int y)
     {
         grid[x,y] = 0;
         Destroy(väljaolek[x,y]);
         ParseGridFall();
+    }
+    private void upgrade(int x,int y){
+        if (grid[x,y]<tiles.Count-1)
+        {
+            grid[x,y] ++;
+            //TODO add gfx
+            Destroy(väljaolek[x,y]);
+            väljaolek[x,y] = Instantiate(tiles[grid[x,y]], gridVectors[x,y], Quaternion.identity, this.transform);
+        }
     }
     private void applyEffects(List<EffectStruct> EffectList){
         foreach (EffectStruct effect in EffectList)
@@ -237,10 +306,10 @@ public class loogika : MonoBehaviour
                 {
                     if (effect.x != gridSize[0] - 1 )
                     {
-                        destroy(effect.x,effect.y+1);
+                        destroy(effect.x+1,effect.y);
                         if (effect.x != gridSize[0] - 2)
                         {
-                            destroy(effect.x,effect.y+2);
+                            destroy(effect.x+2,effect.y);
                         }
                     }
                     
@@ -261,19 +330,37 @@ public class loogika : MonoBehaviour
                 {
                     if (effect.x != 0 )
                     {
-                        destroy(effect.x,effect.y+1);
+                        destroy(effect.x-1,effect.y);
                         if (effect.x != 1)
                         {
-                            destroy(effect.x,effect.y-2);
+                            destroy(effect.x-2,effect.y);
                         }
                     }
                 }
-                break;
+            }
+             if (effect.type == 1)
+            {
+                if (effect.direction == 0)
+                {
+                    upgrade(effect.x+1,effect.y+1);
+                }
+                else if (effect.direction == 1)
+                {
+                    upgrade(effect.x+1,effect.y-1);
+                }
+                else if (effect.direction == 2)
+                {
+                    upgrade(effect.x-1,effect.y-1);
+                }
+                else if (effect.direction == 3)
+                {
+                    upgrade(effect.x-1,effect.y+1);
+                } 
             }
         }
     }
     public void ImputPress(int x, int y){
-        // TODO: decrement energy resource
+        energy--;
         int[] jugglerIds = new int[] {grid[x,y],grid[x,y+1],grid[x+1,y+1],grid[x+1,y]};
 
         GameObject[] juggleObjects = {väljaolek[x,y],väljaolek[x,y+1],väljaolek[x+1,y+1],väljaolek[x+1,y]};
@@ -301,10 +388,13 @@ public class loogika : MonoBehaviour
         väljaolek[x,y+1] = juggleObjects[0];
         väljaolek[x+1,y+1] = juggleObjects[1];
         väljaolek[x+1,y] = juggleObjects[2];
-        
         applyEffects(searchForPatterns(x,y));
-        //TODO Check for Game Over
+        if (energy < 1)
+        {
+            //TODO Game Over
+        }
 
     }
+    
 
 }
