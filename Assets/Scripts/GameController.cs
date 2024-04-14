@@ -7,6 +7,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        AudioController.AudioInstance.KauriPala.Play();
+       // AudioController.AudioInstance.KauriPala.Play();
     }
 }

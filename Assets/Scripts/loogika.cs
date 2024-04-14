@@ -16,6 +16,7 @@ public class loogika : MonoBehaviour
     public int xGridStep = 8;
     public int zGridStep = 8;
     public List<int> gridSize = new List<int> {8,8};
+    public GameObject floorTile;
     private Camera camera;
 
     private Vector3 BoardPosition;
@@ -53,7 +54,7 @@ public class loogika : MonoBehaviour
             for (int j = 0; j <= gridSize[1]; j++)
             {
                 gridVectors[i,j] = new Vector3((i)*xGridStep+xGridStep/2 - xGridStep*gridSize[0]/2,yoffset ,j*zGridStep+zGridStep/2 - zGridStep*gridSize[1]/2);
-                 
+                GameObject.Instantiate(floorTile,gridVectors[i,j],Quaternion.identity, this.transform);
                 //Debug.Log(gridVectors[i,j]);
                 if(i < gridSize[0]  && j < gridSize[1] )
                 {
@@ -193,8 +194,6 @@ public class loogika : MonoBehaviour
                     //basic triangle
                     //in bounds?
                     
-                    Debug.Log("looking for type 1");
-                    energy++;
                     pauseMenu.SetEnergy(energy);
 
                     if (0<=x+a+1 & x+a+1<gridSize[0] & 0<=y+b-2 & y+b-2<gridSize[1])
@@ -259,7 +258,6 @@ public class loogika : MonoBehaviour
                 }
                 if (grid[x+a,y+b] == 2)
                 {
-                    energy++;
                     pauseMenu.SetEnergy(energy);
 
                     if (x+a+2<gridSize[0] & y+b+2<gridSize[1])
@@ -472,6 +470,7 @@ public class loogika : MonoBehaviour
             }
             if (effect.type == 1)
             {
+                energy++;
                 if (effect.direction == 0)
                 {
                     
@@ -505,6 +504,8 @@ public class loogika : MonoBehaviour
             }
             if (effect.type == 2)
             {
+                energy++;
+                
                 if (effect.direction == 0)
                 {   
                     Debug.Log("t2d0");
