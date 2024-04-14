@@ -54,7 +54,7 @@ public class loogika : MonoBehaviour
             for (int j = 0; j <= gridSize[1]; j++)
             {
                 gridVectors[i,j] = new Vector3((i)*xGridStep+xGridStep/2 - xGridStep*gridSize[0]/2,yoffset ,j*zGridStep+zGridStep/2 - zGridStep*gridSize[1]/2);
-                GameObject.Instantiate(floorTile,gridVectors[i,j],Quaternion.identity, this.transform);
+                GameObject.Instantiate(floorTile,new Vector3(gridVectors[i,j].x,gridVectors[i,j].y-1,gridVectors[i,j].z),Quaternion.identity, this.transform);
                 //Debug.Log(gridVectors[i,j]);
                 if(i < gridSize[0]  && j < gridSize[1] )
                 {
@@ -476,30 +476,30 @@ public class loogika : MonoBehaviour
                     
                     Debug.Log("t1d0");
                     upgrade(effect.x+1,effect.y+1); 
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 1)
                 {
                     
                     Debug.Log("t1d1");
                     upgrade(effect.x+1,effect.y-1);
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 2)
                 {
                     Debug.Log("t1d2");
                     upgrade(effect.x-1,effect.y-1);
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 3)
                 {
                     Debug.Log("t1d3");
                     upgrade(effect.x-1,effect.y+1);
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
                 } 
             }
             if (effect.type == 2)
@@ -510,37 +510,37 @@ public class loogika : MonoBehaviour
                 {   
                     Debug.Log("t2d0");
                     upgrade(effect.x+1,effect.y+1);
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 1)
                 {
                     Debug.Log("t2d1");
                     upgrade(effect.x+1,effect.y-1);
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x+UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x+UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 2)
                 {
                     Debug.Log("t2d2");
                     upgrade(effect.x-1,effect.y-1);
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y-UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y-UnityEngine.Random.Range(0,2));
                 }
                 else if (effect.direction == 3)
                 {
                     Debug.Log("t2d3");
                     upgrade(effect.x-1,effect.y+1);
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
-                    swap(effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3),effect.x-UnityEngine.Random.Range(0,3),effect.y+UnityEngine.Random.Range(0,3));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
+                    swap(effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2),effect.x-UnityEngine.Random.Range(0,2),effect.y+UnityEngine.Random.Range(0,2));
                 } 
             }
         }
