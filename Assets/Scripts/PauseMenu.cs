@@ -65,9 +65,9 @@ public class PauseMenu : MonoBehaviour
     {
         AudioController.AudioInstance.Click.Play();
         gameOverMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
     }
 
     public void GameOver()
@@ -86,6 +86,6 @@ public class PauseMenu : MonoBehaviour
 
     public void SetScore(int score)
     {
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "score: " + score.ToString();
     }
 }
