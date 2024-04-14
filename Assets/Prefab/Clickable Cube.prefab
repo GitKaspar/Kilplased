@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8208487714652691706}
   - component: {fileID: 8027518698509218096}
   - component: {fileID: 2772761000230974601}
-  - component: {fileID: 3831687775900806943}
   - component: {fileID: 6113523949408569611}
+  - component: {fileID: 2032565349785831296}
   m_Layer: 0
   m_Name: Clickable Cube
   m_TagString: Untagged
@@ -86,8 +86,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3831687775900806943
-BoxCollider:
+--- !u!114 &6113523949408569611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138595464582318942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a71a86cb06a1464393da7dc03a0ac8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &2032565349785831296
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,21 +116,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  serializedVersion: 2
+  m_Radius: 3.5
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6113523949408569611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7138595464582318942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a71a86cb06a1464393da7dc03a0ac8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3236308781009726498
 PrefabInstance:
   m_ObjectHideFlags: 0
