@@ -81,7 +81,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SetEnergy(int resource)
     {
-        resourceText.text = resource.ToString();
+        resourceText.text = "energia: " + resource.ToString();
     }
 
     public void SetScore(int score)
