@@ -667,7 +667,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1963,6 +1963,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 6944857325930808367}
   gameOverMenuUI: {fileID: 1030174059}
   resourceText: {fileID: 662454888}
+  scoreText: {fileID: 4298461251810879409}
 --- !u!1 &2553467594511709715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,7 +2664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34515448868132077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9af6655cafc793546886a409616418f9, type: 3}
   m_Name: 

@@ -29,7 +29,9 @@ public class loogika : MonoBehaviour
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
         pauseMenu.SetEnergy(startingEnergy);
-        
+        pauseMenu.SetScore(0);
+
+
         energy = startingEnergy;
         BoardPosition = transform.position;
         grid = new int[gridSize[0], gridSize[1]];

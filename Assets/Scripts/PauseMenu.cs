@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject gameOverMenuUI;
     public TextMeshProUGUI resourceText;
+    public TextMeshProUGUI scoreText;
 
     // Update is called once per frame
     void Update()
@@ -81,5 +82,10 @@ public class PauseMenu : MonoBehaviour
     public void SetEnergy(int resource)
     {
         resourceText.text = resource.ToString();
+    }
+
+    public void SetScore(int score)
+    {
+        scoreText.text = "Score: " + score.ToString();
     }
 }
