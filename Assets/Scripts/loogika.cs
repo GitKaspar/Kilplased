@@ -26,6 +26,7 @@ public class loogika : MonoBehaviour
     private GameObject[,] väljaolek;
     private PauseMenu pauseMenu;
     private int Score = 0;
+    public GameObject floorTile;
 
     Sequence seq;
 
