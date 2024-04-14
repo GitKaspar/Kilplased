@@ -1573,7 +1573,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.5, y: 1, z: 6.5}
+  m_LocalScale: {x: 6.5, y: 6.5, z: 6.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   energy: 0
   tiles:
   - {fileID: 3531831021340352712, guid: c98011e65abee034caaa77b367b42214, type: 3}
-  - {fileID: 3389856775369897586, guid: 17185accc3b574849800c2b456625e8b, type: 3}
+  - {fileID: 3389856775369897586, guid: 4947bb9dece66f540b77b39a1c9f0183, type: 3}
   - {fileID: 1447084009409076609, guid: 0805363ef40f06146a4a19eb9f73b3dd, type: 3}
   - {fileID: 3892225566534562537, guid: 94fec2e5855c9dd439cb4884ad43b630, type: 3}
   - {fileID: 3105022449151747036, guid: 9fe42ff354c9cbb419b38ac259c8471e, type: 3}
