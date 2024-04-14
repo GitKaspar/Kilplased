@@ -9,9 +9,4 @@ public class GameController : MonoBehaviour
     {
         AudioController.AudioInstance.KauriPala.Play();
     }
-
-    private void OnDestroy()
-    {
-        AudioController.AudioInstance.KauriPala.Stop();
-    }
 }

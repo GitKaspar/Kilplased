@@ -23,12 +23,17 @@ public class loogika : MonoBehaviour
     private int[,] grid;
     private Vector3[,] gridVectors;
     private GameObject[,] väljaolek;
+    private PauseMenu pauseMenu;
 
     Sequence seq;
 
     void Start()
     {
-        
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        pauseMenu.SetEnergy(startingEnergy);
+        pauseMenu.SetScore(0);
+
+
         energy = startingEnergy;
         BoardPosition = transform.position;
         grid = new int[gridSize[0], gridSize[1]];
@@ -492,6 +497,8 @@ public class loogika : MonoBehaviour
     }
     public void ImputPress(int x, int y){
         energy--;
+        pauseMenu.SetEnergy(energy);
+
         int[] jugglerIds = new int[] {grid[x,y],grid[x,y+1],grid[x+1,y+1],grid[x+1,y]};
 
         GameObject[] juggleObjects = {väljaolek[x,y],väljaolek[x,y+1],väljaolek[x+1,y+1],väljaolek[x+1,y]};
@@ -528,7 +535,7 @@ public class loogika : MonoBehaviour
         //applyEffects(searchForPatterns(x,y));
         if (energy < 1)
         {
-            //TODO Game Over
+            pauseMenu.GameOver();
         }
 
     }
