@@ -19,6 +19,4 @@ MonoBehaviour:
   Cooldown: 0.1
   Loop: 0
   Clips:
-  - {fileID: 8300000, guid: e6eafac4b9e1f07448e5d82ecd8ea778, type: 3}
   - {fileID: 8300000, guid: 247b5a275562191438e899e3746a393f, type: 3}
-  - {fileID: 8300000, guid: 7303d428185660e4f9e37e58b2753e4a, type: 3}

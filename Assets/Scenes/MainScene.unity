@@ -2172,7 +2172,7 @@ MonoBehaviour:
   - {fileID: 3389856775369897586, guid: 3d9c3fe63f04de04180ece0dc7c37638, type: 3}
   - {fileID: 3389856775369897586, guid: 0bf1a62950a840c488c01884f44c3a8f, type: 3}
   ButtonPrefab: {fileID: 7138595464582318942, guid: 9a77046c227bf894abf37614d611846e, type: 3}
-  yoffset: 1
+  yoffset: 0
   xGridStep: 8
   zGridStep: 8
   gridSize: 0800000008000000
@@ -2481,7 +2481,6 @@ RectTransform:
   - {fileID: 2889089466448821511}
   - {fileID: 662454887}
   - {fileID: 1559160627}
-  - {fileID: 574066481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
