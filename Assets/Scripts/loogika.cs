@@ -21,11 +21,13 @@ public class loogika : MonoBehaviour
     private int[,] grid;
     private Vector3[,] gridVectors;
     private GameObject[,] väljaolek;
+    private PauseMenu pauseMenu;
 
     Sequence seq;
 
     void Start()
     {
+    pauseMenu = FindObjectOfType<PauseMenu>();
         
         energy = startingEnergy;
         BoardPosition = transform.position;
@@ -391,7 +393,7 @@ public class loogika : MonoBehaviour
         applyEffects(searchForPatterns(x,y));
         if (energy < 1)
         {
-            //TODO Game Over
+            pauseMenu.GameOver();
         }
 
     }

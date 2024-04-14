@@ -978,7 +978,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1769224761536896461}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alusta uuesti
+  m_text: Uuesti!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a446a97041aa4084fbf5bdfa0a53a1d7, type: 2}
   m_sharedMaterial: {fileID: 1056735638716868303, guid: a446a97041aa4084fbf5bdfa0a53a1d7, type: 2}
@@ -1204,8 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3794add529de1884a88a0dcb85d06147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverMenu: {fileID: 0}
-  Resource: 0
 --- !u!1 &1788695513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbc5497995ac2f49bf0e675b709ffe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingEnergy: 10
+  energy: 0
   tiles:
   - {fileID: 3531831021340352712, guid: c98011e65abee034caaa77b367b42214, type: 3}
   - {fileID: 3389856775369897586, guid: 17185accc3b574849800c2b456625e8b, type: 3}
@@ -1470,8 +1470,6 @@ MonoBehaviour:
   xGridStep: 8
   zGridStep: 8
   gridSize: 0800000008000000
-  GameOverMenu: {fileID: 0}
-  Resource: 0
 --- !u!1 &2007645983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 6944857325930808367}
+  gameOverMenuUI: {fileID: 1030174059}
 --- !u!1 &2553467594511709715
 GameObject:
   m_ObjectHideFlags: 0
