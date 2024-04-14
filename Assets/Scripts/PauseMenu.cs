@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject gameOverMenuUI;
+    public TextMeshProUGUI resourceText;
 
     // Update is called once per frame
     void Update()
@@ -73,5 +75,10 @@ public class PauseMenu : MonoBehaviour
         gameOverMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+    }
+
+    public void SetEnergy(int resource)
+    {
+        resourceText.text = resource.ToString();
     }
 }

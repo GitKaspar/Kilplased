@@ -27,7 +27,8 @@ public class loogika : MonoBehaviour
 
     void Start()
     {
-    pauseMenu = FindObjectOfType<PauseMenu>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        pauseMenu.SetEnergy(startingEnergy);
         
         energy = startingEnergy;
         BoardPosition = transform.position;
@@ -363,6 +364,8 @@ public class loogika : MonoBehaviour
     }
     public void ImputPress(int x, int y){
         energy--;
+        pauseMenu.SetEnergy(energy);
+
         int[] jugglerIds = new int[] {grid[x,y],grid[x,y+1],grid[x+1,y+1],grid[x+1,y]};
 
         GameObject[] juggleObjects = {väljaolek[x,y],väljaolek[x,y+1],väljaolek[x+1,y+1],väljaolek[x+1,y]};
