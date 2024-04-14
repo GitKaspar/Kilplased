@@ -26,6 +26,7 @@ public class loogika : MonoBehaviour
     private Vector3[,] gridVectors;
     private GameObject[,] väljaolek;
     private PauseMenu pauseMenu;
+    private int Score = 0;
 
     Sequence seq;
 
@@ -412,6 +413,8 @@ public class loogika : MonoBehaviour
                 // 1 = left
                 // 2 = down
                 // 3 = left
+                Score += 1;
+                pauseMenu.SetScore(Score);
                 
                 if (effect.direction == 0)
                 {
@@ -471,6 +474,9 @@ public class loogika : MonoBehaviour
             if (effect.type == 1)
             {
                 energy++;
+                Score += 5;
+                pauseMenu.SetScore(Score);
+
                 if (effect.direction == 0)
                 {
                     
@@ -505,6 +511,8 @@ public class loogika : MonoBehaviour
             if (effect.type == 2)
             {
                 energy++;
+                Score += 10;
+                pauseMenu.SetScore(Score);
                 
                 if (effect.direction == 0)
                 {   
