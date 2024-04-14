@@ -195,6 +195,8 @@ public class loogika : MonoBehaviour
                     
                     Debug.Log("looking for type 1");
                     energy++;
+                    pauseMenu.SetEnergy(energy);
+
                     if (0<=x+a+1 & x+a+1<gridSize[0] & 0<=y+b-2 & y+b-2<gridSize[1])
                     {
                         if (grid[x+a+1,y+b-2]==1)
@@ -257,7 +259,9 @@ public class loogika : MonoBehaviour
                 }
                 if (grid[x+a,y+b] == 2)
                 {
-                    Debug.Log("looking for type 2 squear");
+                    energy++;
+                    pauseMenu.SetEnergy(energy);
+
                     if (x+a+2<gridSize[0] & y+b+2<gridSize[1])
                     {
                         if (grid[x+a+2,y+b]==2)
